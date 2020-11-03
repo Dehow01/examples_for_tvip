@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-12">
+        <ng-container *ngIf="documents.length">
+            <select class="custom-select custom-select-sm selectCert" (change)="setCertificate($event)">
+                <option selected disabled>Выберите сертификат для подписания</option>
+                <option *ngFor="let item of listCerts" [value]="item.id">{{item.name}}</option>
+            </select>
+            <button class="btn" type="button" (click)="refresh()"><i class="fa fa-refresh fa-lg"
+                                                                     aria-hidden="true"></i></button>
+        </ng-container>
+        <div class="documents" *ngFor="let item of documents; let idx = index">
+            <div class="nameDoc">
+                {{
+                item.name
+                }}
+                <ng-container *ngIf="!signFile[idx].sign; else signed">
+                    <button class="btn btn-sm btn-outline-info signDocButton" [value]="idx"
+                            (click)="setSignDoc(buttonId)"
+                            type="button" #buttonId>
+                        <div class="spinner-border" role="status" *ngIf="loadingDoc[idx]; else pencil">
+                            <span class="sr-only">Отправка...</span>
+                        </div>
+                        <ng-template #pencil>
+                            <i class="icon-pencil"></i>
+                        </ng-template>
+                        Подписать
+                    </button>
+                </ng-container>
+                <ng-template #signed>
+                    <button class="btn btn-sm btn-outline-secondary signDocButton" disabled>Подписано</button>
+                </ng-template>
+            </div>
+            <div class="signDocButton">
+            </div>
+        </div>
+    </div>
+</div>

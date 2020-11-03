@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <main class="row content">
+        <div class="col-3">
+            <app-left-navbar></app-left-navbar>
+        </div>
+        <div class="col-9 page">
+            <h1>Собрания акционеров</h1>
+            <img src="../../../assets/img/hr.png" class="imgHR">
+            <div class="row">
+                <div class="col-12">
+                    <app-calendar  (OnChangedMonth) = "onChangedMonth($event)"></app-calendar>
+                </div>
+            </div>
+            <div class="row toggleButton">
+                <div class="btn-group btn-group-toggle">
+                    <label class="btn btn-outline-secondary active" [ngClass]="{active:!statusArchive}">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked
+                               (click)="changeCategory('unaccepted')" >Новые заявки
+                    </label>
+                    <label class="btn btn-outline-secondary" [ngClass]="{active:statusArchive}">
+                        <input type="radio" name="options" id="option2" autocomplete="off" checked
+                               (click)="changeCategory('archive')">Архив ОСА
+                    </label>
+                </div>
+            </div>
+                <div class="row elementWorkflow align-items-center" *ngFor="let item of events; let i = index" #parent
+                     [ngClass]="{updated: item.wasUpdated}">
+                    <div class="col-3 pointerCursor" (click)="child.toProcessing(buttonShow)">
+                        <p class="plannedDateTime text-center text-dark"><i class="icon-bell-alt alertBell"
+                                                                            *ngIf="item.wasUpdated"></i>{{item.planned_date_time | date: 'short'}}
+                        </p>
+                    </div>
+                    <div class="col-5 pointerCursor" (click)="child.toProcessing(buttonShow)">
+                        <p class="nameWorkflow">{{item.authorOrganizationName}}</p>
+                    </div>
+                    <div class="col-2">
+                        <p class="text-muted">{{item.status | status: 'event'}}</p>
+                    </div>
+                    <div class="col-2 ">
+                        <input type="button" class="btn btn-outline-primary"
+                               (click)="child.toProcessing(buttonShow);" #buttonShow value="Открыть">
+                    </div>
+                    <div class="col-12">
+                        <app-event-meetings #child [event]="item" #child (closeEvent)="deleteViewApplication(parent)"
+                                            (updateEvent)="updateApplicationEvent(i)"
+                                            [managerStatus]="true" [archiveStatus]="statusArchive"></app-event-meetings>
+                    </div>
+                </div>
+            <div class="row" *ngIf="!events.length">
+                <div class="col-12">
+                    <p>Собрания отсутствуют</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

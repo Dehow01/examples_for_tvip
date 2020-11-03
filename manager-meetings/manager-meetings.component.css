@@ -1,0 +1,44 @@
+.container-fluid{
+    width: 95%;
+}
+.btn-group-toggle{
+    margin-top: 10px;
+}
+.active{
+    background-color: #545b62;
+    border-color: #4e555b;
+}
+.toggleButton{
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.alertBell{
+    color: #ffc107;
+    margin-right: 10px;
+}
+.page{
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px 30px;
+}
+.elementWorkflow p{
+    font-size: 18px;
+}
+.nameWorkflow{
+    font-size: 20px;
+}
+.elementWorkflow{
+    background-color: white;
+    padding: 15px 0 15px 0;
+    border: 1px #e8e8e8 solid;
+    border-left: 10px #e1e1e1 solid;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.plannedDateTime{
+    font-size: 18px;
+}
+.pointerCursor{
+    cursor: pointer;
+}
